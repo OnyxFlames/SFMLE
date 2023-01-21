@@ -22,6 +22,12 @@
     <Filter Include="Source Files\Window">
       <UniqueIdentifier>{0fd38cf1-1bb6-4b3f-b3ec-c24d4b8617cc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\System">
+      <UniqueIdentifier>{d16308a6-9c17-4a4d-ac66-37c35045d18e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\System">
+      <UniqueIdentifier>{95fa6f64-e932-4cb1-990e-37c0bd7fb524}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\SFMLE\main.cpp">
@@ -44,10 +50,16 @@
     <ClInclude Include="include\SFMLE\Window\Keyboard.hpp">
       <Filter>Header Files\Window</Filter>
     </ClInclude>
+    <ClInclude Include="include\SFMLE\System\Vector2.hpp">
+      <Filter>Header Files\System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="include\SFMLE\Graphics\Color.inl">
       <Filter>Header Files\Graphics</Filter>
+    </None>
+    <None Include="include\SFMLE\System\Vector2.inl">
+      <Filter>Header Files\System</Filter>
     </None>
   </ItemGroup>
 </Project>

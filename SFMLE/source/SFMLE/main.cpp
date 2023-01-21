@@ -2,6 +2,7 @@
 #include <SFMLE/Graphics/Color.hpp>
 #include <SFMLE/Window/Camera.hpp>
 #include <iostream>
+#include <SFMLE/System/Vector2.inl>
 
 int main()
 {
@@ -10,6 +11,11 @@ int main()
     shape.setFillColor(sfe::Color::Blend(sf::Color::Blue, sf::Color::Green));
 
     sfe::Camera camera(window);
+
+    sf::Vector2i iVec{ 10, 20 };
+    sf::Vector2f fVec{ 10.f, 20.f };
+
+    std::cout << sfe::Vector2::Length(fVec);
 
     while (window.isOpen())
     {

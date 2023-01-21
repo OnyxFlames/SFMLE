@@ -140,11 +140,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\SFMLE\Graphics\Color.hpp" />
+    <ClInclude Include="include\SFMLE\System\Vector2.hpp" />
     <ClInclude Include="include\SFMLE\Window\Camera.hpp" />
     <ClInclude Include="include\SFMLE\Window\Keyboard.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="include\SFMLE\Graphics\Color.inl" />
+    <None Include="include\SFMLE\System\Vector2.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
