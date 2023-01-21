@@ -21,3 +21,5 @@ namespace sfe
 		static T Distance(const sf::Vector2<T>& vecA, const sf::Vector2<T>& vecB);
 	};
 }
+
+#include <SFMLE/System/Vector2.inl>

@@ -53,6 +53,9 @@
     <ClInclude Include="include\SFMLE\System\Vector2.hpp">
       <Filter>Header Files\System</Filter>
     </ClInclude>
+    <ClInclude Include="include\SFMLE\Common.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="include\SFMLE\Graphics\Color.inl">

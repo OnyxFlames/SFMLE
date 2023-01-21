@@ -2,7 +2,8 @@
 #include <SFMLE/Graphics/Color.hpp>
 #include <SFMLE/Window/Camera.hpp>
 #include <iostream>
-#include <SFMLE/System/Vector2.inl>
+
+#include <SFMLE/System/Vector2.hpp>
 
 int main()
 {

@@ -1,6 +1,3 @@
-#include <string>
-
-#include <SFMLE/System/Vector2.hpp>
 
 namespace sfe
 {

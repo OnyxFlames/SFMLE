@@ -139,6 +139,7 @@
     <ClCompile Include="source\SFMLE\Window\Keyboard.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\SFMLE\Common.hpp" />
     <ClInclude Include="include\SFMLE\Graphics\Color.hpp" />
     <ClInclude Include="include\SFMLE\System\Vector2.hpp" />
     <ClInclude Include="include\SFMLE\Window\Camera.hpp" />
@@ -146,7 +147,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="include\SFMLE\Graphics\Color.inl" />
-    <None Include="include\SFMLE\System\Vector2.inl" />
+    <None Include="include\SFMLE\System\Vector2.inl">
+      <FileType>Document</FileType>
+    </None>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
