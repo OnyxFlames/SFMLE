@@ -9,7 +9,7 @@ int main()
 {
     sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
     sf::CircleShape shape(100.f);
-    shape.setFillColor(sfe::Color::Blend(sf::Color::Blue, sf::Color::Green));
+    shape.setFillColor(sfe::HSL(180, 1.f, 0.5f));
 
     sfe::Camera camera(window);
 

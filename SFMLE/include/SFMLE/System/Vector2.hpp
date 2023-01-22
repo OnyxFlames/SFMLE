@@ -22,4 +22,4 @@ namespace sfe
 	};
 }
 
-#include <SFMLE/System/Vector2.inl>
+#include <SFMLE/System/Detail/Vector2.inl>

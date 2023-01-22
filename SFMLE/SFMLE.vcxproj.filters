@@ -28,6 +28,15 @@
     <Filter Include="Source Files\System">
       <UniqueIdentifier>{95fa6f64-e932-4cb1-990e-37c0bd7fb524}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Graphics\Detail">
+      <UniqueIdentifier>{068d13d3-2c36-49d6-8579-50297aa03c38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\System\Detail">
+      <UniqueIdentifier>{9b6a2518-f09a-4033-8187-b0e26ce298bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Graphics">
+      <UniqueIdentifier>{e4edea7a-0272-4221-8155-cfc976db0dcc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\SFMLE\main.cpp">
@@ -58,11 +67,11 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="include\SFMLE\Graphics\Color.inl">
-      <Filter>Header Files\Graphics</Filter>
+    <None Include="include\SFMLE\Graphics\Detail\Color.inl">
+      <Filter>Header Files\Graphics\Detail</Filter>
     </None>
-    <None Include="include\SFMLE\System\Vector2.inl">
-      <Filter>Header Files\System</Filter>
+    <None Include="include\SFMLE\System\Detail\Vector2.inl">
+      <Filter>Header Files\System\Detail</Filter>
     </None>
   </ItemGroup>
 </Project>
