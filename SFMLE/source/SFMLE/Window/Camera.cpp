@@ -14,6 +14,23 @@ namespace sfe
 	{
 	}
 
+	Camera::Camera(const Camera& camera)
+	{
+		*this = camera;
+	}
+
+	Camera& Camera::operator=(const Camera& camera)
+	{
+		mView = camera.mView;
+		mPosition = camera.mPosition;
+		mRotation = camera.mRotation;
+		mZoomFactor = camera.mZoomFactor;
+		mOriginalSize = camera.mOriginalSize;
+		mCameraBounds = camera.mCameraBounds;
+		mIsBounded = camera.mIsBounded;
+		return *this;
+	}
+
 	void Camera::setPosition(const sf::Vector2f& pos)
 	{
 		if (!mIsBounded)
@@ -59,7 +76,6 @@ namespace sfe
 	void Camera::zoom(float factor)
 	{
 		mZoomFactor *= factor;
-		printf("Zoom: %f\n", mZoomFactor);
 		mView.zoom(factor);
 	}
 
@@ -109,6 +125,18 @@ namespace sfe
 	{
 		mIsBounded = false;
 		mCameraBounds = sf::FloatRect();
+	}
+
+	const sf::FloatRect Camera::getViewBounds() const
+	{
+		return sf::FloatRect
+		(
+			mPosition,
+			mOriginalSize
+			/*mZoomFactor < 1.f ?
+				sf::Vector2f{ mView.getSize().x * (1.f + mZoomFactor), mView.getSize().y * (1.f + mZoomFactor)} :
+				sf::Vector2f{ mView.getSize().x * mZoomFactor, mView.getSize().y * mZoomFactor }*/
+		);
 	}
 
 	const sf::View& Camera::getView() const

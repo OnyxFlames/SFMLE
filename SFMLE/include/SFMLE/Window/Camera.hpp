@@ -18,13 +18,16 @@ namespace sfe
 		sf::Vector2f mPosition;
 		float mRotation = 0.f;
 		float mZoomFactor = 1.f;
-		const sf::Vector2f mOriginalSize;
+		/*const */sf::Vector2f mOriginalSize;
 		sf::FloatRect mCameraBounds;
 		bool mIsBounded = false;
 	public:
 		Camera() = default;
 		Camera(const sf::View& view);
 		Camera(const sf::RenderWindow& window);
+
+		Camera(const Camera& camera);
+		Camera& operator=(const Camera& camera);
 
 		operator sf::View() const
 		{
@@ -48,6 +51,7 @@ namespace sfe
 		const sf::FloatRect& getCameraBounds() const;
 		void resetCameraBounds();
 
+		const sf::FloatRect getViewBounds() const;
 		const sf::View& getView() const;
 	};
 }
