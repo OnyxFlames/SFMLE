@@ -4,6 +4,7 @@
 
 #include <SFML/System/Vector2.hpp>
 
+#include <SFMLE/System/Math.hpp>
 namespace sfe
 {
 	struct Vector2
@@ -19,6 +20,12 @@ namespace sfe
 		// TODO: Add template metaprogramming to only enable when T is float/double
 		template <typename T>
 		static T Distance(const sf::Vector2<T>& vecA, const sf::Vector2<T>& vecB);
+
+		template <typename T>
+		static sf::Vector2<T> SnapTo(const sf::Vector2<T>& vector, const sf::Vector2<T> step)
+		{
+			return sf::Vector2<T> { sfe::Math::Snapped(vector.x, step.x), sfe::Math::Snapped(vector.y, step.y) };
+		}
 	};
 }
 

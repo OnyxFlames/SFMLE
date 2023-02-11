@@ -65,6 +65,12 @@
     <ClInclude Include="include\SFMLE\Common.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\SFMLE\System\Math.hpp">
+      <Filter>Header Files\System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFMLE\System\Rect.hpp">
+      <Filter>Header Files\System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="include\SFMLE\Graphics\Detail\Color.inl">

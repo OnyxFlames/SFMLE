@@ -4,60 +4,29 @@
 #include <iostream>
 
 #include <SFMLE/System/Vector2.hpp>
+#include <SFMLE/System/Rect.hpp>
+#include <SFMLE/System/Math.hpp>
+
+template <typename T>
+void PrintRect(sf::Rect<T>& rect)
+{
+    printf("X: %.f Y: %.f %.fx%.f\n", rect.left, rect.top, rect.width, rect.height);
+}
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sfe::HSL(180, 1.f, 0.5f));
+    srand(0);
 
-    sfe::Camera camera(window);
-
-    sf::Vector2i iVec{ 10, 20 };
-    sf::Vector2f fVec{ 10.f, 20.f };
-
-    std::cout << sfe::Vector2::Length(fVec);
-
-    while (window.isOpen())
+    for (int i = 0; i < 16; ++i)
     {
-        sf::Event event;
-        while (window.pollEvent(event))
+        sf::Vector2f vector
         {
-            switch (event.type)
-            {
-            case sf::Event::Closed:
-                window.close();
-                break;
-            case sf::Event::KeyPressed:
-                switch (event.key.code)
-                {
-                case sf::Keyboard::Escape:
-                    window.close();
-                    break;
-                case sf::Keyboard::PageUp:
-                    camera.zoom(1.5f);
-                    break;
-                case sf::Keyboard::PageDown:
-                    camera.zoom(1.f / 1.5f);
-                    break;
-                case sf::Keyboard::Home:
-                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
-                        camera.setZoom(0.5f);
-                    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::RShift))
-                        camera.setZoom(1.5f);
-                    else
-                        camera.setZoom(1.f);
-                    break;
-                }
-                break;
-            }
-        }
-
-        window.clear();
-        window.setView(camera);
-        window.draw(shape);
-        window.display();
+            (float)(rand() % (16 * 16 * (i + 1))),
+            (float)(rand() % (16 * 16 * (i + 1))),
+        };
+        std::cout << sfe::Vector2::ToString(sfe::Vector2::SnapTo(vector, {16, 16})) << '\n';
     }
+
 
     return 0;
 }
