@@ -21,6 +21,7 @@ namespace sfe
 		template <typename T>
 		static T Lerp(T from, T to, T weight)
 		{
+			static_assert(std::is_floating_point_v<T>, "T must be floating point.");
 			return from + (to - from) * weight;
 		}
 	};

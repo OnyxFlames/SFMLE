@@ -14,9 +14,10 @@ namespace sfe
 		// TODO: Add extended colors (3 from each color type)
 		// from https://htmlcolorcodes.com/color-names/
 
-		static inline sf::Color Blend(const sf::Color& colorA, const sf::Color& colorB, float factor = 0.5f);
-		static inline sf::Color Darken(const sf::Color& color, float factor = 0.10f);
-		static inline sf::Color Lighten(const sf::Color& color, float factor = 0.10f);
+		static inline sf::Color Blend(const sf::Color colorA, const sf::Color colorB, float factor = 0.5f);
+		static inline sf::Color Darken(const sf::Color color, float factor = 0.10f);
+		static inline sf::Color Lighten(const sf::Color color, float factor = 0.10f);
+		static inline sf::Color Highlight(const sf::Color color);
 	};
 
 	struct RGBA

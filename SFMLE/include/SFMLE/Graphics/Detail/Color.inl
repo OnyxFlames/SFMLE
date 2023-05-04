@@ -1,6 +1,6 @@
 namespace sfe
 {
-	sf::Color Color::Blend(const sf::Color& colorA, const sf::Color& colorB, float factor)
+	sf::Color Color::Blend(const sf::Color colorA, const sf::Color colorB, float factor)
 	{
 		assert(factor >= 0.f && factor <= 1.f);
 		const float other = 1.f - factor;
@@ -14,7 +14,7 @@ namespace sfe
 		);
 	}
 
-	inline sf::Color Color::Darken(const sf::Color& color, float factor)
+	inline sf::Color Color::Darken(const sf::Color color, float factor)
 	{
 		auto hsl = HSL(color);
 		if (hsl.l < factor) hsl.l = 0.f;
@@ -23,13 +23,22 @@ namespace sfe
 		return sf::Color(newColor.r, newColor.g, newColor.b, color.a);
 	}
 
-	inline sf::Color Color::Lighten(const sf::Color& color, float factor)
+	inline sf::Color Color::Lighten(const sf::Color color, float factor)
 	{
 		auto hsl = HSL(color);
 		if (hsl.l + factor > 1.f) hsl.l = 1.f;
 		else hsl.l += factor;
 		const auto newColor = HSL::ToColor(hsl);
 		return sf::Color(newColor.r, newColor.g, newColor.b, color.a);
+	}
+
+	inline sf::Color Color::Highlight(const sf::Color color)
+	{
+		auto hsl = HSL(color);
+		if (hsl.l + 0.10f > 1.f) hsl.l = 1.f;
+		else hsl.l += 0.10f;
+		const auto newColor = HSL::ToColor(hsl);
+		return sf::Color(newColor.r, newColor.g, newColor.b, static_cast<uint8_t>(color.a * 0.75f));
 	}
 
 	inline sf::Color sfe::HSL::ToColor(const HSL& hsl)
