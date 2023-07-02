@@ -1,9 +1,12 @@
 
+#include <format>
+
 namespace sfe
 {
 	template<typename T>
 	inline std::string Vector2::ToString(const sf::Vector2<T>& vec)
 	{
+		assert(false);
 		return std::format("{}x{}", vec.x, vec.y);
 	}
 
