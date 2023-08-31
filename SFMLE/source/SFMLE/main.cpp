@@ -7,6 +7,8 @@
 #include <SFMLE/System/Rect.hpp>
 #include <SFMLE/System/Math.hpp>
 
+#include <SFMLE/Graphics/RichText.hpp>
+
 template <typename T>
 void PrintRect(sf::Rect<T>& rect)
 {
@@ -15,18 +17,31 @@ void PrintRect(sf::Rect<T>& rect)
 
 int main()
 {
-    srand(0);
+    sf::RenderWindow window(sf::VideoMode(1280, 720), "SFMLE");
 
-    for (int i = 0; i < 16; ++i)
+    sf::Font font;
+    assert(font.loadFromFile("C:/Windows/Fonts/Consola.ttf"));
+
+    sfe::RichText text(font);
+
+    text.setString("Please find the <#FF0000FF>Sunken Chamber<#FFFFFFFF>\n to discover the great secret.");
+
+    while (window.isOpen())
     {
-        sf::Vector2f vector
+        sf::Event event;
+        while (window.pollEvent(event))
         {
-            (float)(rand() % (16 * 16 * (i + 1))),
-            (float)(rand() % (16 * 16 * (i + 1))),
-        };
-        std::cout << sfe::Vector2::ToString(sfe::Vector2::SnapTo(vector, {16, 16})) << '\n';
+            switch (event.type)
+            {
+            case sf::Event::Closed:
+                window.close();
+                break;
+            }
+        }
+        window.clear();
+        window.draw(text);
+        window.display();
     }
-
 
     return 0;
 }

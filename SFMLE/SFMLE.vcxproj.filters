@@ -48,6 +48,9 @@
     <ClCompile Include="source\SFMLE\Window\Keyboard.cpp">
       <Filter>Source Files\Window</Filter>
     </ClCompile>
+    <ClCompile Include="source\SFMLE\Graphics\RichText.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\SFMLE\Graphics\Color.hpp">
@@ -70,6 +73,9 @@
     </ClInclude>
     <ClInclude Include="include\SFMLE\System\Rect.hpp">
       <Filter>Header Files\System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFMLE\Graphics\RichText.hpp">
+      <Filter>Header Files\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
