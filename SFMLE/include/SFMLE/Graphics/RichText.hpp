@@ -16,15 +16,17 @@ namespace sfe
 	public:
 		class Line : public sf::Drawable, public sf::Transformable
 		{
+			friend class RichText;
 		private:
 			mutable sf::FloatRect mBounds;
 			mutable std::vector<sf::Text> mTexts;
 
+			void updateBounds();
 			void updateBounds(sf::Text& text);
 		public:
 
 			void addText(sf::Text& text);
-
+			std::vector<sf::Text>& getTexts() { return mTexts; }
 			void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
 			sf::FloatRect getLocalBounds() const;
@@ -36,6 +38,8 @@ namespace sfe
 
 		sf::FloatRect mBounds;
 
+		unsigned int mCharacterSize = 30;
+
 		struct TextStroke
 		{
 			sf::Text::Style style = sf::Text::Regular;
@@ -44,6 +48,8 @@ namespace sfe
 			sf::Color ocolor = sf::Color::White;
 		} mCurrentStroke;
 
+
+		void updateBounds();
 
 		void handleAttribute(const sf::String& attr)
 		{
@@ -107,6 +113,7 @@ namespace sfe
 			text.setFillColor(mCurrentStroke.fcolor);
 			text.setOutlineColor(mCurrentStroke.ocolor);
 			text.setOutlineThickness(mCurrentStroke.outline);
+			text.setCharacterSize(mCharacterSize);
 
 			return text;
 		}
@@ -117,6 +124,7 @@ namespace sfe
 		}
 
 		void setString(const sf::String& string);
+		void setCharacterSize(unsigned int size);
 
 		void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 	};

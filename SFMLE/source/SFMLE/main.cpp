@@ -23,7 +23,10 @@ int main()
     assert(font.loadFromFile("C:/Windows/Fonts/Consola.ttf"));
 
     sfe::RichText text(font);
-    text.setString("<bold><italic><strike>Sunken</bold> </strike>Chamber");
+
+    text.setCharacterSize(24);
+    text.setString("<ocolor=#FFFFFFFF><fcolor=#000000FF><outline=1>Sunken <outline=0><fcolor=#FFFFFFFF>Chamber");
+
 
     while (window.isOpen())
     {

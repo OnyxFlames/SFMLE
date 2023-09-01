@@ -31,6 +31,12 @@ namespace sfe
 		}
 	}
 
+	void RichText::Line::updateBounds()
+	{
+		mBounds = {};
+		for (auto& text : mTexts) updateBounds(text);
+	}
+
 	void RichText::Line::updateBounds(sf::Text& text)
 	{
 		text.setPosition(mBounds.width, 0.f);
@@ -89,6 +95,18 @@ namespace sfe
 		return buffer;
 	}
 
+	void RichText::updateBounds()
+	{
+		mBounds = {};
+		for (auto& line : mLines)
+		{
+			line.updateBounds();
+			line.setPosition(0.f, mBounds.height);
+			mBounds.height += line.getGlobalBounds().height;
+			mBounds.width = std::max(mBounds.width, line.getGlobalBounds().width);
+		}
+	}
+
 	void RichText::setString(const sf::String& string)
 	{
 		if (string.isEmpty()) return;
@@ -130,6 +148,20 @@ namespace sfe
 			auto& line = mLines.back();
 			line.setPosition(0.f, mBounds.height);
 		}
+	}
+
+	void RichText::setCharacterSize(unsigned int size)
+	{
+		mCharacterSize = size;
+		for (auto& line : mLines)
+		{ 
+			for (auto& text : line.getTexts())
+			{
+				text.setCharacterSize(mCharacterSize);
+			}
+		}
+
+		updateBounds();
 	}
 
 	void RichText::draw(sf::RenderTarget& target, sf::RenderStates states) const
