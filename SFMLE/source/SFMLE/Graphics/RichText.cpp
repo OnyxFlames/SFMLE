@@ -4,19 +4,140 @@
 
 namespace sfe
 {
-	void RichText::setString(const sf::String& string)
+	namespace
 	{
-		parseString(string);
-	}
-	void RichText::draw(sf::RenderTarget& target, sf::RenderStates states) const
-	{
-		sf::Vector2f pos;
-		for (auto& text : mTexts)
+		inline std::vector<sf::String> split(const sf::String& string, sf::Uint32 delimiter)
 		{
-			text.second.setPosition(text.first);
+			if (string.isEmpty()) return {};
 
-			target.draw(text.second);
-			//pos.x += text.getLocalBounds().width;
+			std::vector<sf::String> results;
+			sf::String buffer;
+			for (auto c : string)
+			{
+				if (c == delimiter)
+				{
+					results.push_back(buffer);
+					buffer.clear();
+				}
+				else
+				{
+					buffer += c;
+				}
+			}
+
+			if (!buffer.isEmpty() || string[string.getSize() - 1] == delimiter) results.push_back(buffer);
+
+			return results;
 		}
 	}
+
+	void RichText::Line::updateBounds(sf::Text& text)
+	{
+		text.setPosition(mBounds.width, 0.f);
+
+		auto lineSpacing = std::floor(text.getFont()->getLineSpacing(text.getCharacterSize()));
+		mBounds.height = std::max(mBounds.height, lineSpacing);
+		mBounds.width += text.getGlobalBounds().width;
+	}
+
+	void RichText::Line::addText(sf::Text& text)
+	{
+		updateBounds(text);
+		mTexts.push_back(text);
+	}
+
+	// TODO: maybe write all of the text to a RenderTexture to be more efficient?
+	void RichText::Line::draw(sf::RenderTarget& target, sf::RenderStates states) const
+	{
+		states.transform *= getTransform();
+
+		for (const auto& text : mTexts) target.draw(text, states);
+	}
+
+	sf::FloatRect RichText::Line::getLocalBounds() const
+	{
+		return mBounds;
+	}
+
+	sf::FloatRect RichText::Line::getGlobalBounds() const
+	{
+		const auto& transform = getTransform();
+		return transform.transformRect(getLocalBounds());
+	}
+
+	inline void validateAttributes(const sf::String& string)
+	{
+		for (size_t i = 0; i < string.getSize(); ++i)
+		{
+			if (string[i] == '<')
+			{
+				while (string[i] != '>')
+				{
+					++i;
+					if (string[i] == '\n') throw std::format_error("Attributes cannot contain newlines.");
+				}
+			}
+		}
+	}
+
+	sf::String parseAttribute(sf::String::ConstIterator itr)
+	{
+		sf::String buffer;
+		++itr;
+		while (*itr != '>') buffer += *itr++;
+
+		return buffer;
+	}
+
+	void RichText::setString(const sf::String& string)
+	{
+		if (string.isEmpty()) return;
+
+		validateAttributes(string);
+
+		auto strings = split(string, '\n');
+
+		for (const auto& string : strings)
+		{
+			for (size_t i = 0; i < string.getSize();)
+			{
+				if (string[i] == '<')
+				{
+					sf::String attribute;
+					while (string[i + 1] != '>') attribute += string[++i];
+					i += 2;
+					handleAttribute(attribute);
+					
+				}
+				else
+				{
+					sf::String buffer;
+					while (string[i] != '<' && i < string.getSize()) buffer += string[i++];
+					//printf("String buffer: '%s'\n", buffer.toAnsiString().c_str());
+					auto text = createText(buffer);
+
+					if (mLines.size() == 0) mLines.emplace_back();
+
+					auto& line = mLines.back();
+					mBounds.height -= line.getGlobalBounds().height;
+
+					line.addText(text);
+					mBounds.height += line.getGlobalBounds().height;
+					mBounds.width = std::max(mBounds.width, line.getGlobalBounds().width);
+				}
+			}
+			mLines.emplace_back();
+			auto& line = mLines.back();
+			line.setPosition(0.f, mBounds.height);
+		}
+	}
+
+	void RichText::draw(sf::RenderTarget& target, sf::RenderStates states) const
+	{
+		states.transform *= getTransform();
+
+		for (auto& line : mLines) target.draw(line, states);
+	}
+
+
 }

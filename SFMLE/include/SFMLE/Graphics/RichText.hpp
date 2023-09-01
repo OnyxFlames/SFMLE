@@ -7,14 +7,34 @@
 #include <SFML/Graphics/Drawable.hpp>
 #include <SFML/Graphics/Transformable.hpp>
 #include <SFML/System/String.hpp>
+#include <format>
 
 namespace sfe
 {
 	class RichText : public sf::Drawable, public sf::Transformable
 	{
+	public:
+		class Line : public sf::Drawable, public sf::Transformable
+		{
+		private:
+			mutable sf::FloatRect mBounds;
+			mutable std::vector<sf::Text> mTexts;
+
+			void updateBounds(sf::Text& text);
+		public:
+
+			void addText(sf::Text& text);
+
+			void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+
+			sf::FloatRect getLocalBounds() const;
+			sf::FloatRect getGlobalBounds() const;
+		};
 	private:
 		sf::Font* mFont;
-		mutable std::vector<std::pair<sf::Vector2f, sf::Text>> mTexts;
+		std::vector<Line> mLines;
+
+		sf::FloatRect mBounds;
 
 		struct TextStroke
 		{
@@ -25,10 +45,13 @@ namespace sfe
 
 		void handleAttribute(const sf::String& attr)
 		{
+			// TODO: character size, outline color, underline, etc
 			const auto ansiString = attr.toAnsiString();
-			if (attr == "bold") mCurrentStroke.style = sf::Text::Bold;
-			else if (attr == "italic") mCurrentStroke.style = sf::Text::Italic;
-			else if (attr == "bolditalic" || attr == "italicbold") mCurrentStroke.style = static_cast<sf::Text::Style>(sf::Text::Bold | sf::Text::Italic);
+			printf("Attribute: '%s'\n", ansiString.c_str());
+			if (attr == "bold") mCurrentStroke.style = static_cast<sf::Text::Style>(mCurrentStroke.style | sf::Text::Bold);
+			else if (attr == "italic") mCurrentStroke.style = static_cast<sf::Text::Style>(mCurrentStroke.style | sf::Text::Italic);
+			else if (attr == "underline") mCurrentStroke.style = static_cast<sf::Text::Style>(mCurrentStroke.style | sf::Text::Underlined);
+			else if (attr == "strike") mCurrentStroke.style = static_cast<sf::Text::Style>(mCurrentStroke.style | sf::Text::StrikeThrough);
 			else if (attr == "regular") mCurrentStroke.style = sf::Text::Regular;
 			else if (attr[0] == '#') // TODO: add <fcolor=#XXXXXXXX> and <ocolor=#XXXXXXXX>
 			{
@@ -38,42 +61,54 @@ namespace sfe
 			}
 		}
 
+		sf::Text createText(const sf::String& string)
+		{
+			sf::Text text;
+
+			text.setFont(*mFont);
+			text.setStyle(mCurrentStroke.style);
+			text.setString(string);
+			text.setFillColor(mCurrentStroke.color);
+
+			return text;
+		}
+
 		void parseString(const sf::String& string)
 		{
-			mTexts.clear();
-			const auto stringSize = string.getSize();
-			for (size_t i = 0; i < stringSize;)
-			{
-				if (string[i] == '<')
-				{
-					sf::String attrBuffer;
-					while (string[i] != '>') attrBuffer += string[++i];
-					attrBuffer.erase(attrBuffer.getSize() - 1);
-					const auto ansiString = attrBuffer.toAnsiString();
-					handleAttribute(attrBuffer);
-					++i;
-				}
-				else
-				{
-					sf::String textBuffer;
+			//const auto stringSize = string.getSize();
+			//for (size_t i = 0; i < stringSize;)
+			//{
+			//	if (string[i] == '<')
+			//	{
+			//		sf::String attrBuffer;
+			//		while (string[i] != '>' && i < stringSize) attrBuffer += string[++i];
+			//		attrBuffer.erase(attrBuffer.getSize() - 1);
+			//		const auto ansiString = attrBuffer.toAnsiString();
+			//		handleAttribute(attrBuffer);
+			//		if (string[i] != '>') throw std::format_error(std::format("Invalid tag {}", attrBuffer.toAnsiString()));
+			//		++i;
+			//	}
+			//	else
+			//	{
+			//		sf::String textBuffer;
 
-					while (string[i] != '<' && i < stringSize)
-					{
-						textBuffer += string[i++];
-					}
+			//		while (string[i] != '<' && i < stringSize)
+			//		{
+			//			textBuffer += string[i++];
+			//		}
 
-					sf::Text text;
-					text.setFont(*mFont);
-					text.setStyle(mCurrentStroke.style);
-					text.setFillColor(mCurrentStroke.color);
-					text.setString(textBuffer);
-					//text.setOrigin({ text.getLocalBounds().width, text.getLocalBounds().height });
+			//		sf::Text text;
+			//		text.setFont(*mFont);
+			//		text.setStyle(mCurrentStroke.style);
+			//		text.setFillColor(mCurrentStroke.color);
+			//		text.setString(textBuffer);
+			//		//text.setOrigin({ text.getLocalBounds().width, text.getLocalBounds().height });
 
-					sf::Vector2f offset = mTexts.size() > 0 ? sf::Vector2f{ mTexts.back().first.x + mTexts.back().second.getLocalBounds().width, mTexts.back().first.y } : sf::Vector2f{};
+			//		sf::Vector2f offset = mTexts.size() > 0 ? sf::Vector2f{ mTexts.back().first.x + mTexts.back().second.getLocalBounds().width, mTexts.back().first.y } : sf::Vector2f{};
 
-					mTexts.emplace_back(offset, text);
-				}
-			}
+			//		mTexts.emplace_back(offset, text);
+			//	}
+			//}
 		}
 	public:
 		RichText() : mFont(nullptr) { }
