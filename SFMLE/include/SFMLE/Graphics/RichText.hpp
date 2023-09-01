@@ -38,26 +38,62 @@ namespace sfe
 
 		struct TextStroke
 		{
-			sf::Text::Style style;
-			sf::Color color = sf::Color::White;
+			sf::Text::Style style = sf::Text::Regular;
+			float outline = 0.f;
+			sf::Color fcolor = sf::Color::White;
+			sf::Color ocolor = sf::Color::White;
 		} mCurrentStroke;
 
 
 		void handleAttribute(const sf::String& attr)
 		{
+			const static auto Contains = [&](const sf::String& string, const sf::String& substring)
+			{
+				return string.find(substring) != sf::String::InvalidPos;
+			};
+
 			// TODO: character size, outline color, underline, etc
-			const auto ansiString = attr.toAnsiString();
-			printf("Attribute: '%s'\n", ansiString.c_str());
-			if (attr == "bold") mCurrentStroke.style = static_cast<sf::Text::Style>(mCurrentStroke.style | sf::Text::Bold);
-			else if (attr == "italic") mCurrentStroke.style = static_cast<sf::Text::Style>(mCurrentStroke.style | sf::Text::Italic);
-			else if (attr == "underline") mCurrentStroke.style = static_cast<sf::Text::Style>(mCurrentStroke.style | sf::Text::Underlined);
-			else if (attr == "strike") mCurrentStroke.style = static_cast<sf::Text::Style>(mCurrentStroke.style | sf::Text::StrikeThrough);
-			else if (attr == "regular") mCurrentStroke.style = sf::Text::Regular;
+			if (attr == "bold")		mCurrentStroke.style = static_cast<sf::Text::Style>(mCurrentStroke.style | sf::Text::Bold);
+			else if (attr == "/bold") mCurrentStroke.style = static_cast<sf::Text::Style>(mCurrentStroke.style & (~sf::Text::Bold));
+			else if (attr == "italic")		mCurrentStroke.style = static_cast<sf::Text::Style>(mCurrentStroke.style | sf::Text::Italic);
+			else if (attr == "/italic") mCurrentStroke.style = static_cast<sf::Text::Style>(mCurrentStroke.style & (~sf::Text::Italic));
+			else if (attr == "underline")	mCurrentStroke.style = static_cast<sf::Text::Style>(mCurrentStroke.style | sf::Text::Underlined);
+			else if (attr == "/underline") mCurrentStroke.style = static_cast<sf::Text::Style>(mCurrentStroke.style & (~sf::Text::Underlined));
+			else if (attr == "strike")		mCurrentStroke.style = static_cast<sf::Text::Style>(mCurrentStroke.style | sf::Text::StrikeThrough);
+			else if (attr == "/strike") mCurrentStroke.style = static_cast<sf::Text::Style>(mCurrentStroke.style & (~sf::Text::StrikeThrough));
+			else if (attr == "regular")		mCurrentStroke.style = sf::Text::Regular;
+			else if (Contains(attr, "fcolor"))
+			{
+				size_t idx = attr.find("=#");
+				if (idx == attr.InvalidPos) return;
+				else
+				{
+					mCurrentStroke.fcolor = sf::Color(std::strtoul(attr.toAnsiString().c_str() + idx + 2, nullptr, 16));
+				}
+			}
+			else if (Contains(attr, "ocolor"))
+			{
+				size_t idx = attr.find("=#");
+				if (idx == attr.InvalidPos) return;
+				else
+				{
+					mCurrentStroke.ocolor = sf::Color(std::strtoul(attr.toAnsiString().c_str() + idx + 2, nullptr, 16));
+				}
+			}
+			else if (Contains(attr, "outline"))
+			{
+				size_t idx = attr.find("=");
+				if (idx == attr.InvalidPos) return;
+				else
+				{
+					mCurrentStroke.outline = std::strtof(attr.toAnsiString().c_str() + idx + 1, nullptr);
+				}
+			}
 			else if (attr[0] == '#') // TODO: add <fcolor=#XXXXXXXX> and <ocolor=#XXXXXXXX>
 			{
 				size_t ptr = 0;
 				const auto colorBuffer = attr.substring(1, attr.getSize() - 0).toAnsiString();
-				mCurrentStroke.color = sf::Color(std::strtoul(colorBuffer.c_str(), nullptr, 16));
+				mCurrentStroke.fcolor = sf::Color(std::strtoul(colorBuffer.c_str(), nullptr, 16));
 			}
 		}
 
@@ -68,47 +104,11 @@ namespace sfe
 			text.setFont(*mFont);
 			text.setStyle(mCurrentStroke.style);
 			text.setString(string);
-			text.setFillColor(mCurrentStroke.color);
+			text.setFillColor(mCurrentStroke.fcolor);
+			text.setOutlineColor(mCurrentStroke.ocolor);
+			text.setOutlineThickness(mCurrentStroke.outline);
 
 			return text;
-		}
-
-		void parseString(const sf::String& string)
-		{
-			//const auto stringSize = string.getSize();
-			//for (size_t i = 0; i < stringSize;)
-			//{
-			//	if (string[i] == '<')
-			//	{
-			//		sf::String attrBuffer;
-			//		while (string[i] != '>' && i < stringSize) attrBuffer += string[++i];
-			//		attrBuffer.erase(attrBuffer.getSize() - 1);
-			//		const auto ansiString = attrBuffer.toAnsiString();
-			//		handleAttribute(attrBuffer);
-			//		if (string[i] != '>') throw std::format_error(std::format("Invalid tag {}", attrBuffer.toAnsiString()));
-			//		++i;
-			//	}
-			//	else
-			//	{
-			//		sf::String textBuffer;
-
-			//		while (string[i] != '<' && i < stringSize)
-			//		{
-			//			textBuffer += string[i++];
-			//		}
-
-			//		sf::Text text;
-			//		text.setFont(*mFont);
-			//		text.setStyle(mCurrentStroke.style);
-			//		text.setFillColor(mCurrentStroke.color);
-			//		text.setString(textBuffer);
-			//		//text.setOrigin({ text.getLocalBounds().width, text.getLocalBounds().height });
-
-			//		sf::Vector2f offset = mTexts.size() > 0 ? sf::Vector2f{ mTexts.back().first.x + mTexts.back().second.getLocalBounds().width, mTexts.back().first.y } : sf::Vector2f{};
-
-			//		mTexts.emplace_back(offset, text);
-			//	}
-			//}
 		}
 	public:
 		RichText() : mFont(nullptr) { }
@@ -118,7 +118,6 @@ namespace sfe
 
 		void setString(const sf::String& string);
 
-		// Inherited via Drawable
 		void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 	};
 

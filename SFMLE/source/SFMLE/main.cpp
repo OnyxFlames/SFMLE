@@ -23,7 +23,7 @@ int main()
     assert(font.loadFromFile("C:/Windows/Fonts/Consola.ttf"));
 
     sfe::RichText text(font);
-    text.setString("The <italic><#FF0000FF><underline>Sunken Chamber<#FFFFFFFF><regular> holds the\n<#7F7F7FFF>Kingdoms<#FFFFFFFF>'s deepest <bold><italic>secrets.");
+    text.setString("<bold><italic><strike>Sunken</bold> </strike>Chamber");
 
     while (window.isOpen())
     {
