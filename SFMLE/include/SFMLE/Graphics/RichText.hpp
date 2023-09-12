@@ -95,12 +95,12 @@ namespace sfe
 					mCurrentStroke.outline = std::strtof(attr.toAnsiString().c_str() + idx + 1, nullptr);
 				}
 			}
-			else if (attr[0] == '#') // TODO: add <fcolor=#XXXXXXXX> and <ocolor=#XXXXXXXX>
-			{
-				size_t ptr = 0;
-				const auto colorBuffer = attr.substring(1, attr.getSize() - 0).toAnsiString();
-				mCurrentStroke.fcolor = sf::Color(std::strtoul(colorBuffer.c_str(), nullptr, 16));
-			}
+			//else if (attr[0] == '#') // TODO: add <fcolor=#XXXXXXXX> and <ocolor=#XXXXXXXX>
+			//{
+			//	size_t ptr = 0;
+			//	const auto colorBuffer = attr.substring(1, attr.getSize() - 0).toAnsiString();
+			//	mCurrentStroke.fcolor = sf::Color(std::strtoul(colorBuffer.c_str(), nullptr, 16));
+			//}
 		}
 
 		sf::Text createText(const sf::String& string)

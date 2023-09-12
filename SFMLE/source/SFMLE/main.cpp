@@ -7,6 +7,8 @@
 #include <SFMLE/System/Rect.hpp>
 #include <SFMLE/System/Math.hpp>
 
+#include <SFMLE/System/PolarVector2.hpp>
+
 #include <SFMLE/Graphics/RichText.hpp>
 
 template <typename T>
@@ -17,33 +19,10 @@ void PrintRect(sf::Rect<T>& rect)
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(1280, 720), "SFMLE");
+    
+    sfe::PolarVector2<float> pvec(sf::Vector2f{1.f, 1.f});
 
-    sf::Font font;
-    assert(font.loadFromFile("C:/Windows/Fonts/Consola.ttf"));
-
-    sfe::RichText text(font);
-
-    text.setCharacterSize(24);
-    text.setString("<ocolor=#FFFFFFFF><fcolor=#000000FF><outline=1>Sunken <outline=0><fcolor=#FFFFFFFF>Chamber");
-
-
-    while (window.isOpen())
-    {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            switch (event.type)
-            {
-            case sf::Event::Closed:
-                window.close();
-                break;
-            }
-        }
-        window.clear();
-        window.draw(text);
-        window.display();
-    }
+    std::cout << sfe::Vector2::ToString<float>(pvec);
 
     return 0;
 }

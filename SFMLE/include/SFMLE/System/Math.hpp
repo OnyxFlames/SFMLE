@@ -2,6 +2,7 @@
 
 #include <type_traits>
 #include <cmath>
+#include <numbers>
 
 namespace sfe
 {
@@ -24,6 +25,18 @@ namespace sfe
 		{
 			static_assert(std::is_floating_point_v<T>, "T must be floating point.");
 			return from + (to - from) * weight;
+		}
+
+		template <typename T>
+		static T RadToDeg(const T radians)
+		{
+			return static_cast<T>(180) / std::numbers::pi_v<T> * radians;
+		}
+
+		template <typename T>
+		static T DegToRad(const T degrees)
+		{
+			return std::numbers::pi_v<T> / static_cast<T>(180) * degrees;
 		}
 	};
 }

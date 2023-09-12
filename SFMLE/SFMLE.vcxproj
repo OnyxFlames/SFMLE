@@ -145,6 +145,7 @@
     <ClInclude Include="include\SFMLE\Graphics\Color.hpp" />
     <ClInclude Include="include\SFMLE\Graphics\RichText.hpp" />
     <ClInclude Include="include\SFMLE\System\Math.hpp" />
+    <ClInclude Include="include\SFMLE\System\PolarVector2.hpp" />
     <ClInclude Include="include\SFMLE\System\Rect.hpp" />
     <ClInclude Include="include\SFMLE\System\Vector2.hpp" />
     <ClInclude Include="include\SFMLE\Window\Camera.hpp" />

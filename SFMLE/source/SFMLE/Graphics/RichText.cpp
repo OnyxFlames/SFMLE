@@ -119,8 +119,9 @@ namespace sfe
 		{
 			for (size_t i = 0; i < string.getSize();)
 			{
-				if (string[i] == '<')
+				if (string[i] == '<' && !(i > 0 && string[i - 1] == '\\'))
 				{
+					//if (i > 0 && string[i - 1] == '\\') continue;
 					sf::String attribute;
 					while (string[i + 1] != '>') attribute += string[++i];
 					i += 2;
@@ -130,8 +131,10 @@ namespace sfe
 				else
 				{
 					sf::String buffer;
+					if (string[i] == '\\' && string[i + 1] == '<') { buffer += "<"; i += 2; }
+
 					while (string[i] != '<' && i < string.getSize()) buffer += string[i++];
-					//printf("String buffer: '%s'\n", buffer.toAnsiString().c_str());
+
 					auto text = createText(buffer);
 
 					if (mLines.size() == 0) mLines.emplace_back();

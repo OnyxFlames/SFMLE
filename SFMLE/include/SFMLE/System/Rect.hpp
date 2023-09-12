@@ -19,5 +19,11 @@ namespace sfe
 
 			return result;
 		}
+
+		template <typename T>
+		static std::string ToString(const sf::Rect<T>& rect)
+		{
+			return std::format("({}, {}; {}x{})", rect.left, rect.top, rect.width, rect.height);
+		}
 	};
 }

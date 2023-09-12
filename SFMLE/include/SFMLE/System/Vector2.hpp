@@ -14,9 +14,26 @@ namespace sfe
 
 		// NOTE: These functions will be removed when SFML adds support for these functions natively
 
+		template <typename T>
+		static T Dot(const sf::Vector2<T>& vec1, const sf::Vector2<T>& vec2);
+
+		template <typename T>
+		static T Cross(const sf::Vector2<T>& vec1, const sf::Vector2<T>& vec2);
+
 		// TODO: Add template metaprogramming to only enable when T is float/double
 		template <typename T>
 		static T Length(const sf::Vector2<T>& vec);
+
+		template <typename T>
+		static T LengthSquared(const sf::Vector2<T>& vec);
+
+		template <typename T>
+		static sf::Vector2<T> Normalized(const sf::Vector2<T>& vec);
+
+		// Angle MUST be in Radians
+		template <typename T>
+		static sf::Vector2<T> Rotated(const sf::Vector2<T>& vec, const T angle);
+
 		// TODO: Add template metaprogramming to only enable when T is float/double
 		template <typename T>
 		static T Distance(const sf::Vector2<T>& vecA, const sf::Vector2<T>& vecB);
