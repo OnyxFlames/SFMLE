@@ -11,18 +11,22 @@
 
 #include <SFMLE/Graphics/RichText.hpp>
 
-template <typename T>
-void PrintRect(sf::Rect<T>& rect)
-{
-    printf("X: %.f Y: %.f %.fx%.f\n", rect.left, rect.top, rect.width, rect.height);
-}
+#include <SFMLE/Graphics/Time.hpp>
+
 
 int main()
 {
+    auto hourAnd12Minutes = sf::milliseconds(60 * 61 * 1000);
     
-    sfe::PolarVector2<float> pvec(sf::Vector2f{1.f, 1.f});
+    sf::Clock clock;
 
-    std::cout << sfe::Vector2::ToString<float>(pvec);
+    while (hourAnd12Minutes > sf::milliseconds(0))
+    {
+        hourAnd12Minutes -= clock.restart();
+        std::cout << sfe::Time::ToString(hourAnd12Minutes, sfe::Time::TimeFormat::DigitalClock) << "\n";
+    }
+
+
 
     return 0;
 }

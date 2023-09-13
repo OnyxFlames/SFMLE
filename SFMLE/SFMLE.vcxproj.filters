@@ -80,6 +80,9 @@
     <ClInclude Include="include\SFMLE\System\PolarVector2.hpp">
       <Filter>Header Files\System</Filter>
     </ClInclude>
+    <ClInclude Include="include\SFMLE\Graphics\Time.hpp">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="include\SFMLE\Graphics\Detail\Color.inl">
