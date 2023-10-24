@@ -28,12 +28,7 @@ namespace sfe
 			using enum Format;
 			switch (format)
 			{
-			case Default:
-				if (time.asSeconds() > 1.0f) return ToString(time, Format::Seconds);
-				if (time.asMilliseconds() > 1) return ToString(time, Format::Milliseconds);
 
-				return ToString(time, Format::Microseconds);
-				break;
 			case Microseconds:	return std::format("{}us", time.asMicroseconds());
 			case Milliseconds:	return std::format("{}ms", time.asMilliseconds());
 			case Seconds:		return std::format("{}s", time.asSeconds());
@@ -92,6 +87,12 @@ namespace sfe
 
 				return std::format("{:02}:{:02}:{:02}", hours, minutes, seconds);
 			}
+			default:
+				if (time.asSeconds() > 1.0f) return ToString(time, Format::Seconds);
+				if (time.asMilliseconds() > 1) return ToString(time, Format::Milliseconds);
+
+				return ToString(time, Format::Microseconds);
+				break;
 			}
 		}
 	};

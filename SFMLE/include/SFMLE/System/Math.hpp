@@ -20,6 +20,7 @@ namespace sfe
 
 			return value;
 		}
+
 		template <typename T>
 		static T Lerp(T from, T to, T weight)
 		{

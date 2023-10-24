@@ -23,7 +23,7 @@ int main()
     while (hourAnd12Minutes > sf::milliseconds(0))
     {
         hourAnd12Minutes -= clock.restart();
-        std::cout << sfe::Time::ToString(hourAnd12Minutes, sfe::Time::Format::MinutesOnly) << "\n";
+        std::cout << sfe::Time::ToString(hourAnd12Minutes, sfe::Time::Format::DigitalClockSeconds) << "\n";
     }
 
 

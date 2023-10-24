@@ -15,6 +15,9 @@ namespace sfe
 		// NOTE: These functions will be removed when SFML adds support for these functions natively
 
 		template <typename T>
+		static sf::Vector2<T> Lerp(const sf::Vector2<T>& from, const sf::Vector2<T>& to, const T weight);
+
+		template <typename T>
 		static T Dot(const sf::Vector2<T>& vec1, const sf::Vector2<T>& vec2);
 
 		template <typename T>

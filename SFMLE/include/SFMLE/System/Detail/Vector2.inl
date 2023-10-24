@@ -1,5 +1,6 @@
 
 #include <format>
+#include "Vector2.hpp"
 
 namespace sfe
 {
@@ -7,6 +8,16 @@ namespace sfe
 	inline std::string Vector2::ToString(const sf::Vector2<T>& vec)
 	{
 		return std::format("({}, {})", vec.x, vec.y);
+	}
+
+	template<typename T>
+	inline sf::Vector2<T> Vector2::Lerp(const sf::Vector2<T>& from, const sf::Vector2<T>& to, const T weight)
+	{
+		return sf::Vector2<T>
+		{
+			Math::Lerp(from.x, to.x, weight),
+			Math::Lerp(from.y, to.y, weight)
+		};
 	}
 
 	template<typename T>
