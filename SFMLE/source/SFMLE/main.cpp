@@ -16,14 +16,14 @@
 
 int main()
 {
-    auto hourAnd12Minutes = sf::milliseconds(60 * 61 * 1000);
+    auto hourAnd12Minutes = sfe::hours(1.f) + sfe::minutes(12);
     
     sf::Clock clock;
 
     while (hourAnd12Minutes > sf::milliseconds(0))
     {
         hourAnd12Minutes -= clock.restart();
-        std::cout << sfe::Time::ToString(hourAnd12Minutes, sfe::Time::TimeFormat::DigitalClock) << "\n";
+        std::cout << sfe::Time::ToString(hourAnd12Minutes, sfe::Time::Format::MinutesOnly) << "\n";
     }
 
 
