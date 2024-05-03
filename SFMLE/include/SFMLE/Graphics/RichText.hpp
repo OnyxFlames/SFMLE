@@ -103,7 +103,7 @@ namespace sfe
 			//}
 		}
 
-		sf::Text createText(const sf::String& string)
+		sf::Text createText(const sf::String& string) const
 		{
 			sf::Text text;
 

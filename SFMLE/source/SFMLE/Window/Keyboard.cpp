@@ -1,5 +1,6 @@
 #include "SFMLE/Window/Keyboard.hpp"
 #include <unordered_map>
+#include <cassert>
 
 namespace sfe
 {
@@ -14,7 +15,17 @@ namespace sfe
 			return table;
 		}
 
+		static std::unordered_map<std::string, sf::Keyboard::Scancode> BuildScancodeNameTable()
+		{
+			std::unordered_map<std::string, sf::Keyboard::Scancode> table;
+
+			for (size_t i = 0; i < sf::Keyboard::Scancode::ScancodeCount; ++i) table[sfe::Keyboard::Scancode::ToString(static_cast<sf::Keyboard::Scancode>(i))] = static_cast<sf::Keyboard::Scancode>(i);
+
+			return table;
+		}
+
 		static std::unordered_map<std::string, sf::Keyboard::Key> keyTable = BuildKeyNameTable();
+		static std::unordered_map<std::string, sf::Keyboard::Scancode> scancodeTable = BuildScancodeNameTable();
 	}
 
 	std::string Keyboard::ToString(sf::Keyboard::Key key)
@@ -130,5 +141,15 @@ namespace sfe
 		if (!keyTable.contains(key)) sf::Keyboard::Unknown;
 
 		return keyTable[key];
+	}
+	std::string Keyboard::Scancode::ToString(sf::Keyboard::Scancode scancode)
+	{
+		assert(false && "Implement sfe::Keyboard::Scancode::ToString()");
+		return std::string();
+	}
+	sf::Keyboard::Scancode Keyboard::Scancode::FromString(const std::string& scancode)
+	{
+		assert(false && "Implement sfe::Keyboard::Scancode::FromString()");
+		return sf::Keyboard::Scancode();
 	}
 }

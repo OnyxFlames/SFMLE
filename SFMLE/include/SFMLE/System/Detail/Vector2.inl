@@ -61,8 +61,8 @@ namespace sfe
 	template<typename T>
 	inline sf::Vector2<T> Vector2::Rotated(const sf::Vector2<T>& vec, const T angle)
 	{
-		T sine = std::sin(angle);
-		T cosine = std::cos(angle);
+		const T sine = std::sin(angle);
+		const T cosine = std::cos(angle);
 
 		return sf::Vector2<T>{ vec.x * cosine - vec.y * sine, vec.x * sine + vec.y * cosine };
 	}

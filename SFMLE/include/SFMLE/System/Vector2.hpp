@@ -5,6 +5,9 @@
 #include <SFML/System/Vector2.hpp>
 
 #include <SFMLE/System/Math.hpp>
+
+#include <SFMLE/System/Direction.hpp>
+
 namespace sfe
 {
 	struct Vector2
@@ -45,6 +48,18 @@ namespace sfe
 		static sf::Vector2<T> SnapTo(const sf::Vector2<T>& vector, const sf::Vector2<T> step)
 		{
 			return sf::Vector2<T> { sfe::Math::Snapped(vector.x, step.x), sfe::Math::Snapped(vector.y, step.y) };
+		}
+
+		template <typename T>
+		static sf::Vector2<T> Direction(const Direction direction)
+		{
+			switch (direction)
+			{
+			case Direction::Up: return		{  0, -1 };
+			case Direction::Right: return	{  1,  0 };
+			case Direction::Down: return	{  0,  1 };
+			case Direction::Left: return	{ -1,  0 };
+			}
 		}
 	};
 }

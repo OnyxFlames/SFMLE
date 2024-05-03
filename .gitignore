@@ -348,3 +348,5 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+/SFMLE/include/SFMLE/Graphics/InfiniteTexture.hpp
+/SFMLE/include/SFMLE/Events/EventManager.hpp

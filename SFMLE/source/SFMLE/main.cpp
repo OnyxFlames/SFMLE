@@ -12,21 +12,29 @@
 #include <SFMLE/Graphics/RichText.hpp>
 
 #include <SFMLE/Graphics/Time.hpp>
+#include <SFMLE/Resources/ResourceContainer.hpp>
 
 
 int main()
 {
-    auto hourAnd12Minutes = sfe::hours(1.f) + sfe::minutes(12);
-    
-    sf::Clock clock;
-
-    while (hourAnd12Minutes > sf::milliseconds(0))
+    enum ResourceId
     {
-        hourAnd12Minutes -= clock.restart();
-        std::cout << sfe::Time::ToString(hourAnd12Minutes, sfe::Time::Format::DigitalClockSeconds) << "\n";
+        Texture,
+    };
+    sfe::ResourceContainer<sf::Texture, ResourceId> resources;
+
+    try
+    {
+        resources.load(Texture, "texture.png");
+
+        auto& res = resources.require(Texture);
+        resources.release(Texture);
     }
-
-
+    catch (std::exception& ex)
+    {
+        printf("[EXCEPTION]: %s\n", ex.what());
+    }
+    
 
     return 0;
 }

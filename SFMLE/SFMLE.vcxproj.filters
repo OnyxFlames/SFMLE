@@ -37,6 +37,12 @@
     <Filter Include="Source Files\Graphics">
       <UniqueIdentifier>{e4edea7a-0272-4221-8155-cfc976db0dcc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Resources">
+      <UniqueIdentifier>{9ef43837-4715-4e34-a69a-51827d07ca13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Events">
+      <UniqueIdentifier>{4b9a3f47-4443-4012-bf69-c0c1c54e1580}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\SFMLE\main.cpp">
@@ -82,6 +88,24 @@
     </ClInclude>
     <ClInclude Include="include\SFMLE\Graphics\Time.hpp">
       <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFMLE\Graphics\InfiniteTexture.hpp">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFMLE\System\Direction.hpp">
+      <Filter>Header Files\System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFMLE\Graphics\Sprite.hpp">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFMLE\Resources\ResourceContainer.hpp">
+      <Filter>Header Files\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFMLE\Events\EventManager.hpp">
+      <Filter>Header Files\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFMLE\Resources\TextureContainer.hpp">
+      <Filter>Header Files\Resources</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
