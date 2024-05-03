@@ -39,6 +39,10 @@ namespace sfe
 			}
 		};
 
+		struct Wheel
+		{
+
+		};
 
 	};
 }

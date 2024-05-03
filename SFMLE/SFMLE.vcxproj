@@ -157,6 +157,7 @@
     <ClInclude Include="include\SFMLE\System\Vector2.hpp" />
     <ClInclude Include="include\SFMLE\Window\Camera.hpp" />
     <ClInclude Include="include\SFMLE\Window\Keyboard.hpp" />
+    <ClInclude Include="include\SFMLE\Window\Mouse.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="include\SFMLE\Graphics\Detail\Color.inl" />
