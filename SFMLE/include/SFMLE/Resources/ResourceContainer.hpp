@@ -5,6 +5,8 @@
 #include <unordered_map>
 #include <stdexcept>
 #include <type_traits>
+#include <format>
+
 
 namespace sfe
 {
