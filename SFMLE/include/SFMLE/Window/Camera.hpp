@@ -19,7 +19,7 @@ namespace sfe
 		float mRotation = 0.f;
 		float mZoomFactor = 1.f;
 		/*const */sf::Vector2f mOriginalSize;
-		sf::FloatRect mCameraBounds;
+		sf::FloatRect mCameraLimit;
 		bool mIsBounded = false;
 	public:
 		Camera() = default;
@@ -30,6 +30,11 @@ namespace sfe
 		Camera& operator=(const Camera& camera);
 
 		operator sf::View() const
+		{
+			return mView;
+		}
+
+		operator const sf::View&() const
 		{
 			return mView;
 		}
@@ -47,9 +52,10 @@ namespace sfe
 
 		void move(const sf::Vector2f& offset);
 
-		void setCameraBounds(const sf::FloatRect& rect);
-		const sf::FloatRect& getCameraBounds() const;
-		void resetCameraBounds();
+		// the bounding box that the camera is free to move in, and will stop if hitting the edges
+		void setCameraLimit(const sf::FloatRect& rect);
+		const sf::FloatRect& getCameraLimit() const;
+		void resetCameraLimit();
 
 		const sf::FloatRect getViewBounds() const;
 		const sf::View& getView() const;

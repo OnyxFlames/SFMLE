@@ -26,7 +26,7 @@ namespace sfe
 		mRotation = camera.mRotation;
 		mZoomFactor = camera.mZoomFactor;
 		mOriginalSize = camera.mOriginalSize;
-		mCameraBounds = camera.mCameraBounds;
+		mCameraLimit = camera.mCameraLimit;
 		mIsBounded = camera.mIsBounded;
 		return *this;
 	}
@@ -41,10 +41,10 @@ namespace sfe
 		else
 		{
 			auto newPos = pos;
-			if (pos.x < mCameraBounds.left) newPos.x = mCameraBounds.left;
-			if (pos.x + mView.getSize().x > (mCameraBounds.left + mCameraBounds.width)) newPos.x = mCameraBounds.left + mCameraBounds.width - mView.getSize().x;
-			if (pos.y < mCameraBounds.top) newPos.y = mCameraBounds.top;
-			if (pos.y + mView.getSize().y > (mCameraBounds.top + mCameraBounds.height)) newPos.y = mCameraBounds.top + mCameraBounds.height - mView.getSize().y;
+			if (pos.x < mCameraLimit.left) newPos.x = mCameraLimit.left;
+			if (pos.x + mView.getSize().x > (mCameraLimit.left + mCameraLimit.width)) newPos.x = mCameraLimit.left + mCameraLimit.width - mView.getSize().x;
+			if (pos.y < mCameraLimit.top) newPos.y = mCameraLimit.top;
+			if (pos.y + mView.getSize().y > (mCameraLimit.top + mCameraLimit.height)) newPos.y = mCameraLimit.top + mCameraLimit.height - mView.getSize().y;
 
 			mView.move(newPos - mPosition);
 			mPosition = newPos;
@@ -100,31 +100,31 @@ namespace sfe
 		else
 		{
 			auto newOffset = offset;
-			if (offset.x + mPosition.x < mCameraBounds.left) newOffset.x = mCameraBounds.left;
-			if (offset.x + mPosition.x + mView.getSize().x > (mCameraBounds.left + mCameraBounds.width)) newOffset.x = 0.f;// mCameraBounds.left + mCameraBounds.width - mView.getSize().x;
-			if (offset.y + mPosition.y < mCameraBounds.top) newOffset.y = mCameraBounds.top;
-			if (offset.y + mPosition.y + mView.getSize().y > (mCameraBounds.top + mCameraBounds.height)) newOffset.y = 0.f;// = mCameraBounds.top + mCameraBounds.height - mView.getSize().y;
+			if (offset.x + mPosition.x < mCameraLimit.left) newOffset.x = mCameraLimit.left;
+			if (offset.x + mPosition.x + mView.getSize().x > (mCameraLimit.left + mCameraLimit.width)) newOffset.x = 0.f;// mCameraBounds.left + mCameraBounds.width - mView.getSize().x;
+			if (offset.y + mPosition.y < mCameraLimit.top) newOffset.y = mCameraLimit.top;
+			if (offset.y + mPosition.y + mView.getSize().y > (mCameraLimit.top + mCameraLimit.height)) newOffset.y = 0.f;// = mCameraBounds.top + mCameraBounds.height - mView.getSize().y;
 
 			mPosition += newOffset;
 			mView.move(newOffset);
 		}
 	}
 
-	void Camera::setCameraBounds(const sf::FloatRect& rect)
+	void Camera::setCameraLimit(const sf::FloatRect& rect)
 	{
-		mCameraBounds = rect;
+		mCameraLimit = rect;
 		mIsBounded = true;
 	}
 
-	const sf::FloatRect& Camera::getCameraBounds() const
+	const sf::FloatRect& Camera::getCameraLimit() const
 	{
-		return mCameraBounds;
+		return mCameraLimit;
 	}
 
-	void Camera::resetCameraBounds()
+	void Camera::resetCameraLimit()
 	{
 		mIsBounded = false;
-		mCameraBounds = sf::FloatRect();
+		mCameraLimit = sf::FloatRect();
 	}
 
 	const sf::FloatRect Camera::getViewBounds() const
