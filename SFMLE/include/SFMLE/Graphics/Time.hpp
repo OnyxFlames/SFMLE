@@ -15,6 +15,7 @@ namespace sfe
 			Microseconds,
 			Milliseconds,
 			Seconds,
+			Minutes,
 			MinutesOnly,
 			Hours,
 			DigitalClock,
@@ -32,6 +33,7 @@ namespace sfe
 			case Microseconds:	return std::format("{}us", time.asMicroseconds());
 			case Milliseconds:	return std::format("{}ms", time.asMilliseconds());
 			case Seconds:		return std::format("{}s", time.asSeconds());
+			case Minutes:		return std::format("{} minutes", time.asSeconds() / 60.f);
 			case MinutesOnly:	return std::format("{} minutes", (int32_t)(time.asSeconds() / 60.f));
 			case DigitalClock:
 			{
