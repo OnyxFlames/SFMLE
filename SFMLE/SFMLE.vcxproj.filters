@@ -110,6 +110,9 @@
     <ClInclude Include="include\SFMLE\Window\Mouse.hpp">
       <Filter>Header Files\Window</Filter>
     </ClInclude>
+    <ClInclude Include="include\SFMLE\Window\Event.hpp">
+      <Filter>Header Files\Window</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="include\SFMLE\Graphics\Detail\Color.inl">

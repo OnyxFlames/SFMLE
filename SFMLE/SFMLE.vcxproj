@@ -40,7 +40,7 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
@@ -156,6 +156,7 @@
     <ClInclude Include="include\SFMLE\System\Rect.hpp" />
     <ClInclude Include="include\SFMLE\System\Vector2.hpp" />
     <ClInclude Include="include\SFMLE\Window\Camera.hpp" />
+    <ClInclude Include="include\SFMLE\Window\Event.hpp" />
     <ClInclude Include="include\SFMLE\Window\Keyboard.hpp" />
     <ClInclude Include="include\SFMLE\Window\Mouse.hpp" />
   </ItemGroup>

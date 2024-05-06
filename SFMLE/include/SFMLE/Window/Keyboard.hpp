@@ -18,10 +18,6 @@ namespace sfe
 
 	struct Keyboard
 	{
-	public:
-		//static const std::string ToString(sf::Keyboard::Key key);
-		//static const sf::Keyboard::Key FromString(const std::string& key);
-
 		struct Key
 		{
 			static const std::string ToString(sf::Keyboard::Key key)
@@ -256,7 +252,7 @@ namespace sfe
 					case Numpad8: return "Numpad8";
 					case Numpad9: return "Numpad9";
 					case Numpad0: return "Numpad0";
-
+						// Skip anything past numpads.. maybe add later
 					default: return "Unknown";
 
 				}
