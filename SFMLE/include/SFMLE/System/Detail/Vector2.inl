@@ -73,4 +73,10 @@ namespace sfe
 		return LengthSquared<T>(sf::Vector2<T>{ vecA.x - vecB.x, vecA.y - vecB.y });
 	}
 
+	template<typename T>
+	inline sf::Vector2<T> Vector2::DistanceVector(const sf::Vector2<T>& vecA, const sf::Vector2<T>& vecB)
+	{
+		return { vecA.x - vecB.x, vecA.y - vecB.y };
+	}
+
 }

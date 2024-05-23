@@ -44,6 +44,10 @@ namespace sfe
 		template <typename T>
 		static T Distance(const sf::Vector2<T>& vecA, const sf::Vector2<T>& vecB);
 
+		// Get a vector representing the distance of 2 vectors
+		template <typename T>
+		static sf::Vector2<T> DistanceVector(const sf::Vector2<T>& vecA, const sf::Vector2<T>& vecB);
+
 		template <typename T>
 		static sf::Vector2<T> SnapTo(const sf::Vector2<T>& vector, const sf::Vector2<T> step)
 		{
