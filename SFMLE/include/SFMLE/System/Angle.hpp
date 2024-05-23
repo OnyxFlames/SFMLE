@@ -27,6 +27,11 @@ namespace sfe
 			return angle;
 		}
 
+		static inline Angle<T> FromVector(const sf::Vector2<T>& vec)
+		{
+			return Angle<T>::Radians(std::atan2(vec.y, vec.x));
+		}
+
 		const T asDegrees() const { return value; }
 		const T asRadians() const { return sfe::Math::DegToRad(value); }
 	};
