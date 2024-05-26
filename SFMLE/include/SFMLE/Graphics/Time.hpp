@@ -15,7 +15,7 @@ namespace sfe
 			Microseconds,
 			Milliseconds,
 			Seconds,
-			Minutes,
+			FractionalMinutes,
 			MinutesOnly,
 			Hours,
 			DigitalClock,
@@ -29,12 +29,11 @@ namespace sfe
 			using enum Format;
 			switch (format)
 			{
-
-			case Microseconds:	return std::format("{}us", time.asMicroseconds());
-			case Milliseconds:	return std::format("{}ms", time.asMilliseconds());
-			case Seconds:		return std::format("{}s", time.asSeconds());
-			case Minutes:		return std::format("{} minutes", time.asSeconds() / 60.f);
-			case MinutesOnly:	return std::format("{} minutes", (int32_t)(time.asSeconds() / 60.f));
+			case Microseconds:			return std::format("{}us", time.asMicroseconds());
+			case Milliseconds:			return std::format("{}ms", time.asMilliseconds());
+			case Seconds:				return std::format("{}s", time.asSeconds());
+			case FractionalMinutes:		return std::format("{} minutes", time.asSeconds() / 60.f);
+			case MinutesOnly:			return std::format("{} minutes", (int32_t)(time.asSeconds() / 60.f));
 			case DigitalClock:
 			{
 				int32_t hours = 0;
@@ -90,6 +89,7 @@ namespace sfe
 				return std::format("{:02}:{:02}:{:02}", hours, minutes, seconds);
 			}
 			default:
+				if (time.asSeconds() > 60.f) return ToString(time, Format::FractionalMinutes);
 				if (time.asSeconds() > 1.0f) return ToString(time, Format::Seconds);
 				if (time.asMilliseconds() > 1) return ToString(time, Format::Milliseconds);
 

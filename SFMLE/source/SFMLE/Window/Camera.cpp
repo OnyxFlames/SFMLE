@@ -9,7 +9,7 @@ namespace sfe
 		mView.setCenter(mView.getSize() / 2.f);
 	}
 
-	Camera::Camera(const sf::RenderWindow& window)
+	Camera::Camera(const sf::RenderTarget& window)
 		:	Camera(window.getView())
 	{
 	}
@@ -27,13 +27,13 @@ namespace sfe
 		mZoomFactor = camera.mZoomFactor;
 		mOriginalSize = camera.mOriginalSize;
 		mCameraLimit = camera.mCameraLimit;
-		mIsBounded = camera.mIsBounded;
+		mIsLimited = camera.mIsLimited;
 		return *this;
 	}
 
 	void Camera::setPosition(const sf::Vector2f& pos)
 	{
-		if (!mIsBounded)
+		if (!mIsLimited)
 		{
 			mView.move(pos - mPosition);
 			mPosition = pos;
@@ -92,7 +92,7 @@ namespace sfe
 
 	void Camera::move(const sf::Vector2f& offset)
 	{
-		if (!mIsBounded)
+		if (!mIsLimited)
 		{
 			mPosition += offset;
 			mView.move(offset);
@@ -101,9 +101,9 @@ namespace sfe
 		{
 			auto newOffset = offset;
 			if (offset.x + mPosition.x < mCameraLimit.left) newOffset.x = mCameraLimit.left;
-			if (offset.x + mPosition.x + mView.getSize().x > (mCameraLimit.left + mCameraLimit.width)) newOffset.x = 0.f;// mCameraBounds.left + mCameraBounds.width - mView.getSize().x;
+			if (offset.x + mPosition.x + mView.getSize().x > (mCameraLimit.left + mCameraLimit.width)) newOffset.x = 0.f;
 			if (offset.y + mPosition.y < mCameraLimit.top) newOffset.y = mCameraLimit.top;
-			if (offset.y + mPosition.y + mView.getSize().y > (mCameraLimit.top + mCameraLimit.height)) newOffset.y = 0.f;// = mCameraBounds.top + mCameraBounds.height - mView.getSize().y;
+			if (offset.y + mPosition.y + mView.getSize().y > (mCameraLimit.top + mCameraLimit.height)) newOffset.y = 0.f;
 
 			mPosition += newOffset;
 			mView.move(newOffset);
@@ -113,7 +113,7 @@ namespace sfe
 	void Camera::setCameraLimit(const sf::FloatRect& rect)
 	{
 		mCameraLimit = rect;
-		mIsBounded = true;
+		mIsLimited = true;
 	}
 
 	const sf::FloatRect& Camera::getCameraLimit() const
@@ -123,7 +123,7 @@ namespace sfe
 
 	void Camera::resetCameraLimit()
 	{
-		mIsBounded = false;
+		mIsLimited = false;
 		mCameraLimit = sf::FloatRect();
 	}
 

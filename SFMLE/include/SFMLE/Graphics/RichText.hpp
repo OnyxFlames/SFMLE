@@ -123,6 +123,7 @@ namespace sfe
 		{
 		}
 
+		void setFont(sf::Font& font) { mFont = &font; }
 		void setString(const sf::String& string);
 		void setCharacterSize(unsigned int size);
 

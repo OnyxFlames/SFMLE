@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFMLE/System/Math.hpp>
+#include <SFML/System/Vector2.hpp>
 
 namespace sfe
 {
@@ -40,7 +41,7 @@ namespace sfe
 	Angle<T> radians(const T rads) { return Angle<T>::Radians(rads); }
 
 	template <typename T>
-	Angle<T> degrees(const T rads) { return Angle<T>::Degrees(rads); }
+	Angle<T> degrees(const T degs) { return Angle<T>::Degrees(degs); }
 
 	typedef Angle<float> FloatAngle;
 	typedef Angle<double> DoubleAngle;

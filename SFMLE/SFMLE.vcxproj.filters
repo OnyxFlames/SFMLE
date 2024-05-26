@@ -51,9 +51,6 @@
     <ClCompile Include="source\SFMLE\Window\Camera.cpp">
       <Filter>Source Files\Window</Filter>
     </ClCompile>
-    <ClCompile Include="source\SFMLE\Window\Keyboard.cpp">
-      <Filter>Source Files\Window</Filter>
-    </ClCompile>
     <ClCompile Include="source\SFMLE\Graphics\RichText.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
@@ -112,6 +109,18 @@
     </ClInclude>
     <ClInclude Include="include\SFMLE\Window\Event.hpp">
       <Filter>Header Files\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFMLE\Resources\FontContainer.hpp">
+      <Filter>Header Files\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFMLE\Resources\SoundContainer.hpp">
+      <Filter>Header Files\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFMLE\Graphics\Text.hpp">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFMLE\System\Angle.hpp">
+      <Filter>Header Files\System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

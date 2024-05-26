@@ -20,11 +20,11 @@ namespace sfe
 		float mZoomFactor = 1.f;
 		/*const */sf::Vector2f mOriginalSize;
 		sf::FloatRect mCameraLimit;
-		bool mIsBounded = false;
+		bool mIsLimited = false;
 	public:
 		Camera() = default;
 		Camera(const sf::View& view);
-		Camera(const sf::RenderWindow& window);
+		Camera(const sf::RenderTarget& window);
 
 		Camera(const Camera& camera);
 		Camera& operator=(const Camera& camera);

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -138,7 +138,6 @@
     <ClCompile Include="source\SFMLE\Graphics\RichText.cpp" />
     <ClCompile Include="source\SFMLE\main.cpp" />
     <ClCompile Include="source\SFMLE\Window\Camera.cpp" />
-    <ClCompile Include="source\SFMLE\Window\Keyboard.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\SFMLE\Common.hpp" />
@@ -146,10 +145,14 @@
     <ClInclude Include="include\SFMLE\Graphics\Color.hpp" />
     <ClInclude Include="include\SFMLE\Graphics\RichText.hpp" />
     <ClInclude Include="include\SFMLE\Graphics\InfiniteTexture.hpp" />
+    <ClInclude Include="include\SFMLE\Graphics\Text.hpp" />
     <ClInclude Include="include\SFMLE\Graphics\Time.hpp" />
     <ClInclude Include="include\SFMLE\Graphics\Sprite.hpp" />
+    <ClInclude Include="include\SFMLE\Resources\FontContainer.hpp" />
     <ClInclude Include="include\SFMLE\Resources\ResourceContainer.hpp" />
+    <ClInclude Include="include\SFMLE\Resources\SoundContainer.hpp" />
     <ClInclude Include="include\SFMLE\Resources\TextureContainer.hpp" />
+    <ClInclude Include="include\SFMLE\System\Angle.hpp" />
     <ClInclude Include="include\SFMLE\System\Direction.hpp" />
     <ClInclude Include="include\SFMLE\System\Math.hpp" />
     <ClInclude Include="include\SFMLE\System\PolarVector2.hpp" />
