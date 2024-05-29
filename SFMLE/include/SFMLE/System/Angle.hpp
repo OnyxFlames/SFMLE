@@ -14,14 +14,14 @@ namespace sfe
 		Angle() = default;
 	public:
 
-		static inline Angle<T> Degrees(const T degrees)
+		static constexpr inline Angle<T> Degrees(const T degrees)
 		{
 			Angle<T> angle;
 			angle.value = degrees;
 			return angle;
 		}
 
-		static inline Angle<T> Radians(const T radians)
+		static constexpr inline Angle<T> Radians(const T radians)
 		{
 			Angle<T> angle;
 			angle.value = sfe::Math::RadToDeg(radians);
@@ -33,15 +33,15 @@ namespace sfe
 			return Angle<T>::Radians(std::atan2(vec.y, vec.x));
 		}
 
-		const T asDegrees() const { return value; }
-		const T asRadians() const { return sfe::Math::DegToRad(value); }
+		constexpr T asDegrees() const { return value; }
+		constexpr T asRadians() const { return sfe::Math::DegToRad(value); }
 	};
 
 	template <typename T>
-	Angle<T> radians(const T rads) { return Angle<T>::Radians(rads); }
+	constexpr Angle<T> radians(const T rads) { return Angle<T>::Radians(rads); }
 
 	template <typename T>
-	Angle<T> degrees(const T degs) { return Angle<T>::Degrees(degs); }
+	constexpr Angle<T> degrees(const T degs) { return Angle<T>::Degrees(degs); }
 
 	typedef Angle<float> FloatAngle;
 	typedef Angle<double> DoubleAngle;

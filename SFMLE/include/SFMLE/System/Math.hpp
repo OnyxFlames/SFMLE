@@ -29,14 +29,14 @@ namespace sfe
 		}
 
 		template <typename T>
-		static T RadToDeg(const T radians)
+		static constexpr T RadToDeg(const T radians)
 		{
 			constexpr auto radToDeg = static_cast<T>(180) / std::numbers::pi_v<T>;
 			return radToDeg * radians;
 		}
 
 		template <typename T>
-		static T DegToRad(const T degrees)
+		static constexpr T DegToRad(const T degrees)
 		{
 			constexpr auto degToRad = std::numbers::pi_v<T> / static_cast<T>(180);
 			return degToRad * degrees;
