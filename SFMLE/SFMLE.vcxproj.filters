@@ -122,6 +122,9 @@
     <ClInclude Include="include\SFMLE\System\Angle.hpp">
       <Filter>Header Files\System</Filter>
     </ClInclude>
+    <ClInclude Include="include\SFMLE\Graphics\FadingText.hpp">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="include\SFMLE\Graphics\Detail\Color.inl">

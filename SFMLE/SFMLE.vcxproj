@@ -143,6 +143,7 @@
     <ClInclude Include="include\SFMLE\Common.hpp" />
     <ClInclude Include="include\SFMLE\Events\EventManager.hpp" />
     <ClInclude Include="include\SFMLE\Graphics\Color.hpp" />
+    <ClInclude Include="include\SFMLE\Graphics\FadingText.hpp" />
     <ClInclude Include="include\SFMLE\Graphics\RichText.hpp" />
     <ClInclude Include="include\SFMLE\Graphics\InfiniteTexture.hpp" />
     <ClInclude Include="include\SFMLE\Graphics\Text.hpp" />
